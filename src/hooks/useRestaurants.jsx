@@ -1,0 +1,31 @@
+import React, { useState, useEffect } from "react";
+import yelp from "./../services/yelp";
+
+export default () => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [errorMessage, setErrorMessage] = useState();
+
+  const onEndSearchEdit = async (searchTerm) => {
+    try {
+      const response = await yelp.get("/search", {
+        params: {
+          limit: 50,
+          term: searchTerm,
+          location: "san jose",
+        },
+      });
+      setRestaurants(response.data.businesses);
+      setErrorMessage();
+    } catch (error) {
+      setErrorMessage("Something went wrong");
+      console.log(error)
+      setRestaurants([]);
+    }
+  };
+
+  useEffect(() => {
+    onEndSearchEdit("pasta");
+  }, []);
+
+  return [restaurants, onEndSearchEdit, errorMessage];
+};
