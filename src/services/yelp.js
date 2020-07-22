@@ -9,10 +9,6 @@ const yelp = axios.create({
   },
 });
 
-
-yelp.interceptors.request.use(
-  AxiosLogger.requestLogger,
-  AxiosLogger.errorLogger
-);
+yelp.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
 
 export default yelp;

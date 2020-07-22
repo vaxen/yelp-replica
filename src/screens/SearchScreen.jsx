@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import SearchBar from "../components/SearchBar";
 import useRestaurants from "../hooks/useRestaurants";
@@ -6,7 +6,8 @@ import ResultList from "../components/ResultList";
 
 const SearchScreen = () => {
   const [term, setTerm] = useState();
-  const [restaurants, onEndSearchEdit, errorMessage] = useRestaurants(term);
+
+  const [restaurants, onEndSearchEdit, errorMessage] = useRestaurants();
 
   const onSearchChange = (newTerm) => {
     setTerm(newTerm);
@@ -22,7 +23,7 @@ const SearchScreen = () => {
       <SearchBar
         searchTerm={term}
         onSearchChange={onSearchChange}
-        onEndSearchEdit={onEndSearchEdit}
+        onSubmit={() => onEndSearchEdit(term)}
       />
       <ScrollView>
         <ResultList title="Cheap" results={filterResultByPrice("$")} />

@@ -1,12 +1,16 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
-import ResultDetail from "./ResultDetail";
 import { withNavigation } from "react-navigation";
+import ResultDetail from "./ResultDetail";
 
 const ResultList = ({ title, results, navigation }) => {
-  
-  const toRestaurantDetail = (item) =>{
+  const toRestaurantDetail = (item) => {
     navigation.navigate("DetailRestaurant", { id: item.id });
+  };
+
+  if (!results.length) {
+    return null;
   }
 
   return (
@@ -17,13 +21,11 @@ const ResultList = ({ title, results, navigation }) => {
         showsHorizontalScrollIndicator={false}
         data={results}
         keyExtractor={(result) => result.id}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity onPress={() => toRestaurantDetail(item)} >
-              <ResultDetail result={item} />
-            </TouchableOpacity>
-          );
-        }}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => toRestaurantDetail(item)}>
+            <ResultDetail result={item} />
+          </TouchableOpacity>
+        )}
       />
     </View>
   );
@@ -32,14 +34,14 @@ const ResultList = ({ title, results, navigation }) => {
 export default withNavigation(ResultList);
 
 const styles = StyleSheet.create({
-  title: {
-    fontWeight: "bold",
-    fontSize: 25,
-    textAlign: "center",
-    marginLeft: 15,
-    marginBottom: 5
-  },
   container: {
-    marginBottom: 5
+    marginBottom: 5,
+  },
+  title: {
+    fontSize: 25,
+    fontWeight: "bold",
+    marginBottom: 5,
+    marginLeft: 15,
+    textAlign: "center",
   },
 });

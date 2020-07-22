@@ -1,14 +1,16 @@
+/* eslint-disable react-native/no-color-literals */
+/* eslint-disable react/prop-types */
 import React from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-const SearchBar = ({ searchTerm, onSearchChange, onEndSearchEdit }) => {
+const SearchBar = ({ searchTerm, onSearchChange, onSubmit }) => {
   const onTextChange = (newSearch) => {
     onSearchChange(newSearch);
   };
 
   const onEndEditing = () => {
-    onEndSearchEdit();
+    onSubmit();
   };
 
   return (
@@ -31,21 +33,21 @@ export default SearchBar;
 const styles = StyleSheet.create({
   backgroundStyle: {
     backgroundColor: "#F0EEEE",
-    height: 50,
     borderRadius: 5,
-    marginHorizontal: 15,
     flexDirection: "row",
+    height: 50,
+    marginBottom: 10,
+    marginHorizontal: 15,
     marginTop: 15,
-    marginBottom: 10
+  },
+  iconStyle: {
+    alignSelf: "center",
+    marginHorizontal: 15,
   },
   inputStyle: {
     //borderColor: "black",
     //borderWidth: 1,
     flex: 1,
     fontSize: 20,
-  },
-  iconStyle: {
-    alignSelf: "center",
-    marginHorizontal: 15,
   },
 });

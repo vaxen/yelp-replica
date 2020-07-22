@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import yelp from "./../services/yelp";
+import { useState, useEffect } from "react";
+import yelp from "../services/yelp";
 
 export default () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -18,7 +18,6 @@ export default () => {
       setErrorMessage();
     } catch (error) {
       setErrorMessage("Something went wrong");
-      console.log(error)
       setRestaurants([]);
     }
   };
